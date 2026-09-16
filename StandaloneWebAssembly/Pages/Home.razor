@@ -1,0 +1,116 @@
+﻿@page "/"
+@using StandaloneWebAssembly.CustomEvents
+
+@inject IJSRuntime JS
+
+<PageTitle>ScrollTop collision</PageTitle>
+
+<h1>Notifications</h1>
+
+<p>
+    Scroll down the notifications, then use the button to return to the top.
+</p>
+
+<button class="btn btn-primary mb-3" @onclick="ScrollToTopAsync">Back to top</button>
+
+<div id="scrolltop-event-target"
+     class="activity-feed"
+     @onscrolltop="OnScrollTop"
+     @oncustomscrolltop="OnCustomScrollTop">
+    @foreach (var item in activityItems)
+    {
+        <div class="activity-item">
+            <strong>@item.Title</strong>
+            <span>@item.Description</span>
+        </div>
+    }
+</div>
+<br/>
+<p>
+    <strong>Native Handler</strong>: Invoked by a custom event registered using <code>blazor.registerCustomEventType</code>, where the custom event name is the same as the underlying <code>browserEventName</code>.
+</p>
+
+<p>
+<strong>Custom Handler</strong>: Invoked by a custom event registered using <code>blazor.registerCustomEventType</code>, where the custom event name differs from the underlying <code>browserEventName</code>.
+</p>
+
+<p class="mt-3">
+    Native Handler count: <strong>@nativeCount</strong>
+    Custom Handler count: <strong>@customCount</strong>
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <em> - @message</em>
+    }
+</p>
+
+<p>
+    On .NET 10, one dispatch is expected to invoke the handler twice. On .NET
+    11, startup is expected to reject the colliding custom event registration.
+</p>
+
+@code {
+    private const string TargetId = "scrolltop-event-target";
+    private int nativeCount;
+    private int customCount;
+    private string? message;
+
+    public class ActivityItem
+    {
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+    }
+
+    private readonly List<ActivityItem> activityItems = new List<ActivityItem>();
+
+    protected override void OnInitialized()
+    {
+        for (int index = 1; index <= 12; index++)
+        {
+            activityItems.Add(new ActivityItem
+            {
+                Title = "Notification " + index,
+                Description = "A new update is available for item " + index + "."
+            });
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("initializeScrollTop", TargetId);
+            }
+            catch (Exception ex)
+            {
+                // Handles network disconnections or Blazor circuit crashes
+                Console.WriteLine($"Interop failed: {ex.Message}");
+            }
+        }
+    }
+
+    private async Task ScrollToTopAsync()
+    {
+            try
+            {
+                await JS.InvokeVoidAsync("scrollToTop", TargetId);
+            }
+            catch (Exception ex)
+            {
+                // Handles network disconnections or Blazor circuit crashes
+                Console.WriteLine($"Interop failed: {ex.Message}");
+            }
+    }
+
+    private void OnScrollTop(ScrollTopEventArgs eventArgs)
+    {
+        nativeCount++;
+        message = eventArgs.Message;
+    }
+    private void OnCustomScrollTop(ScrollTopEventArgs eventArgs)
+    {
+        customCount++;
+        message = eventArgs.Message;
+    }
+}
