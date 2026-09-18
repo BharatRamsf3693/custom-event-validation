@@ -1,0 +1,11 @@
+Utils.js:148 [2026-09-18T11:44:20.380Z] Information: Normalizing '_blazor' to 'https://localhost:7135/_blazor'.
+EventTypes.ts:29 Uncaught (in promise) Error: The custom event 'scroll' cannot have the same name as its browserEventName 'scroll'. Choose a different name for the custom event.
+    at Object.registerCustomEventType (EventTypes.ts:29:11)
+    at afterWebStarted (InteractiveServer.fdnin11p9v.lib.module.js:41:12)
+    at JSInitializers.ts:170:66
+    at Array.map (<anonymous>)
+    at yo.invokeAfterStartedCallbacks (JSInitializers.ts:170:50)
+    at Boot.Web.ts:200:22
+Utils.js:148 [2026-09-18T11:44:20.400Z] Information: WebSocket connected to wss://localhost:7135/_blazor?id=FRczRFSqXRVycI9zTqTDHA.
+browserLink:4 [Violation] Permissions policy violation: unload is not allowed in this document.
+add @ browserLink:4
