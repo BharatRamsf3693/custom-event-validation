@@ -1,0 +1,16 @@
+EventTypes.ts:29 Uncaught (in promise) Error: The custom event 'scroll' cannot have the same name as its browserEventName 'scroll'. Choose a different name for the custom event.
+    at Object.registerCustomEventType (EventTypes.ts:29:11)
+    at afterWebStarted (InteractiveWebAssembly.fdnin11p9v.lib.module.js:41:12)
+    at JSInitializers.ts:170:66
+    at Array.map (<anonymous>)
+    at yo.invokeAfterStartedCallbacks (JSInitializers.ts:170:50)
+    at Boot.Web.ts:200:22
+registerCustomEventType @ EventTypes.ts:29
+afterWebStarted @ InteractiveWebAssembly.fdnin11p9v.lib.module.js:41
+(anonymous) @ JSInitializers.ts:170
+invokeAfterStartedCallbacks @ JSInitializers.ts:170
+(anonymous) @ Boot.Web.ts:200
+await in (anonymous)
+onInitialDomContentLoaded @ Boot.Web.ts:125
+MonoDebugger.ts:23 Debugging hotkey: Shift+Alt+D (when application has focus)
+(index):1 The resource https://localhost:7111/InteractiveWebAssembly.Client.5hp9fo4n5l.bundle.scp.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
