@@ -1,0 +1,12 @@
+/* CSS for Home component */
+.activity-feed {
+    height: 20rem;
+    overflow-y: auto;
+    border: 1px solid #c9ced6;
+    scroll-behavior: smooth;
+}
+
+.activity-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e6e6e6;
+}

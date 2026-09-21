@@ -1,0 +1,18 @@
+MonoDebugger.ts:23 Debugging hotkey: Shift+Alt+D (when application has focus)
+EventTypes.ts:29 Uncaught (in promise) Error: The custom event 'scroll' cannot have the same name as its browserEventName 'scroll'. Choose a different name for the custom event.
+    at Object.registerCustomEventType (EventTypes.ts:29:11)
+    at afterStarted (StandaloneWebAssembly.0dfphg15mk.lib.module.js:41:12)
+    at JSInitializers.ts:170:66
+    at Array.map (<anonymous>)
+    at Bt.invokeAfterStartedCallbacks (JSInitializers.ts:170:50)
+    at xn (Boot.WebAssembly.Common.ts:195:15)
+registerCustomEventType @ EventTypes.ts:29
+afterStarted @ StandaloneWebAssembly.0dfphg15mk.lib.module.js:41
+(anonymous) @ JSInitializers.ts:170
+invokeAfterStartedCallbacks @ JSInitializers.ts:170
+startCore @ Boot.WebAssembly.Common.ts:195
+await in startCore
+startWebAssembly @ Boot.WebAssembly.Common.ts:78
+boot @ Boot.WebAssembly.ts:34
+(anonymous) @ Boot.WebAssembly.ts:41
+(anonymous) @ Boot.WebAssembly.ts:41
